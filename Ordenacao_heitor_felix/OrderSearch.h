@@ -24,30 +24,35 @@ char InsertSort(char nome[][50], int n)  //
 
 
 
-void PesquisaBinaria(int n, char nomes[][50], char busca[50])
+int PesquisaBinaria(int n, char nomes[][50], char busca[50])
 {
-    int i, primeiro,ultimo,meio;
+    int i, inferior,superior,meio, retorno=0;
     InsertSort(nomes, n);
-    primeiro=0;
-    ultimo=n-1;
-    while(primeiro<=ultimo)
+    inferior=0;
+    superior=n-1;
+
+    while(inferior<=superior)
     {
-        meio=(primeiro+ultimo)/2;
+        meio=(inferior+superior)/2;
         if (strcmp(busca,nomes[meio])==0)
         {
-            printf("Nome encontrado \n");
-            break;
+            // printf("Nome encontrado \n Pressione qualquer tecla para voltar\n");
+            retorno++;
+            return retorno;
         }
 
         else if(strcmp(busca,nomes[meio])>0)
         {
-            primeiro=meio+1;
+            inferior=meio+1;
         }
 
         else
         {
-            ultimo=meio-1;
+            superior=meio-1;
         }
     }
-        printf("Nome não encontrado\n");
+        // printf("Nome não encontrado\n");
+        return retorno;
  }
+
+ 
