@@ -10,13 +10,13 @@ main(){
 	
 	struct sfila fila_Campos, fila_Guarus;
 	int opcao;
-	char carro, primeiro_carro_campos, primeiro_carro_guarus;
+	char carro, primeiro_carro_campos, primeiro_carro_guarus, op;
 	setlocale(LC_ALL, "Portuguese");
 	
 	qinit(&fila_Campos);
 	qinit(&fila_Guarus);
 	
-	while(opcao!=6){
+	while(opcao!=4){
 	
 	
 	
@@ -24,12 +24,10 @@ main(){
 	
 	
 	
-	printf("1 - Adicionar carro na fila Campos\n\n\n");
-	printf("2 - Adicionar carro na fila de Guarus\n\n\n");
-	printf("3 - Remover carros das filas\n\n\n");
-	printf("4 - Primeiro carro da fila de Campos.\n\n\n");
-	printf("5 - Primeiro carro da fila de Guarus.\n\n\n");
-	printf("6 - Sair do programa.\n\n\n");
+	printf("1 - Cadastrar Campos-Guarus.\n\n\n");
+	printf("2 - Cadastrar Guarus-Campos.\n\n\n");
+	printf("3 - Liberar Travessia.\n\n\n");
+	printf("4 - Sair.\n\n\n");
 	scanf("%i", &opcao);
 	
 	
@@ -75,52 +73,82 @@ main(){
 		if(qisEmpty(&fila_Campos) == 0 && qisEmpty(&fila_Guarus) == 0){
 			
 			primeiro_carro_campos =	first(&fila_Campos);
-			printf("\n\nO carro que saiu da fila de Campos foi: %c\n\n", primeiro_carro_campos);
+			printf("\n\nSentido Campos-Guarus:\n\nAtravessando carro: %c\n\n", primeiro_carro_campos);
 			primeiro_carro_guarus = first(&fila_Guarus);
-			printf("\n\nO carro que saiu da fila de Guarus foi: %c\n\n", primeiro_carro_guarus);
+			printf("\n\nSentido Guarus-Campos:\n\nAtravessando carro: %c\n\n", primeiro_carro_guarus);
+			
+			printf("\n\nDeseja prosseguir?(S/N)\n\n");
+			scanf(" %c", &op);
+			
+			if(op=='S'){
 			
 			
-		dequeue(&fila_Campos);
-		dequeue(&fila_Guarus);
-		
+			dequeue(&fila_Campos);
+			dequeue(&fila_Guarus);
+			}
+			
+			else if(op=='N'){
+				break;
+			}
+			else{
+				printf("Comando inválido!");
+			}
 		}
 		
 		else if(qisEmpty(&fila_Campos) == 0 && qisEmpty(&fila_Guarus) == 1){
-			printf("A fila de Guarus está vazia! Adicione carros.");
+			primeiro_carro_campos =	first(&fila_Campos);
+			printf("\n\nSentido Campos-Guarus:\n\nAtravessando carro: %c\n\n", primeiro_carro_campos);
+			printf("A fila de Guarus está vazia!");
+			
+			printf("\n\nDeseja prosseguir?(S/N)\n\n");
+			scanf(" %c", &op);
+			
+				if(op=='S'){
+			
+			
+			dequeue(&fila_Campos);
+			
+			}
+			
+			else if(op=='N'){
+				break;
+			}
+			else{
+				printf("Comando inválido!");
+			}
+		
 		}
 		
 		else if(qisEmpty(&fila_Campos) == 1 && qisEmpty(&fila_Guarus) == 0){
-			printf("A fila de Campos está vazia! Adicione carros.");
+			primeiro_carro_guarus = first(&fila_Guarus);
+			printf("\n\nSentido Guarus-Campos:\n\nAtravessando carro: %c\n\n", primeiro_carro_guarus);
+			printf("A fila de Campos está vazia!");
+			
+			printf("\n\nDeseja prosseguir?(S/N)\n\n");
+			scanf(" %c", &op);
+				if(op=='S'){
+			
+			
+		
+			dequeue(&fila_Guarus);
+			}
+			
+			else if(op=='N'){
+				break;
+			}
+			else{
+				printf("Comando inválido!");
+			}
 		}
 		
 		else{
-			printf("As duas filas estão vazias! Adicione carros.");
+			printf("As duas filas estão vazias!");
 		}
 		
 		break;	
 		
 		
-		
-		
-		case 4:
-			
-			primeiro_carro_campos = first(&fila_Campos);
-			printf("\n\nO primeiro carro da fila de Campos é: %c\n\n", primeiro_carro_campos);
-			
-		break;
-		
-		
-		
-		case 5:
-			
-			primeiro_carro_guarus = first(&fila_Guarus);
-			printf("O primeiro carro da fila de Guarus é: %c", primeiro_carro_guarus);
-			
-		break;
-		
-		
-		
-		case 6: 
+		case 4: 
 			
 			printf("Você saiu do programa!");
 			
